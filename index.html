@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pi Collecting Game</title>
+
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<script src="jquery-4.0.0.js"></script>
+<script src="./pi_data.js"></script>
+<script src="./data.js"></script>
+<script src="./main.js"></script>
+
+    <div id="top_bar"><h5 id="user_id_display">Loading...</h5><h5 style="position: absolute;right: 7px;">Eldorado Pi Game</h5></div>
+
+
+    <div id="main_content">      
+        <div id="collected_pis">
+            
+        </div>
+
+        <div id="leaderboard">
+            <h3 style="border-bottom: 1px solid #DDDDDD;">Leaderboard</h3>
+        </div>
+    </div>
+
+    <div id="user_id_popup" class="hidden_popup">
+        <h2>Enter your student ID to claim a PI!</h2>
+        <input>
+        <button onclick="UpdateStudentID()">Claim</button>
+    </div>
+
+    <div id="pi_display_popup" class="hidden_popup">
+        <img>
+        <h3>Name</h3>
+        <p>Fact</p>
+        <button onclick="ClosePiPopup()">Close</button>
+    </div>
+
+    <div id="animation_holder"></div>
+</body>
+</html>

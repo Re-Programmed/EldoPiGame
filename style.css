@@ -1,0 +1,326 @@
+:root {
+  --text-color: #dddddd;
+  --text-font: monospace;
+
+  --bg-very-dark: #000017;
+  --bg-darker: #000028;
+  --bg-dark: #00003d;
+  --bg-dark-highlight: #00004d;
+  --bg-medium: #005f6e;
+  --bg-medium-hover: #17729f;
+  --bg-light: #7a7aab;
+}
+
+#top_bar
+{
+    margin-top: -16px;
+    margin-left: -8px;
+
+    height: 30px;
+    width: calc(100% + 16px);
+
+    background-color: var(--bg-darker);
+    border-bottom: 1px solid #DDDDDD;
+
+    padding-left: 7px;
+
+    justify-content: flex-start;
+    align-items: flex-end;
+    display: flex;
+}
+
+#top_bar > h5
+{
+    margin-top: 24px;
+    margin-bottom: 3px;
+
+    font-size: 14px;
+}
+
+#user_id_popup
+{
+    filter: drop-shadow(16px 13px 10px #000000AA);
+
+    font-size: 1.33em;
+
+    position: fixed;
+
+    top: 50%; left: 50%;
+
+    border: 4px solid var(--bg-medium);
+
+    background-color: var(--bg-dark);
+    text-align: center;
+
+    padding: 7px;
+    padding-bottom: 14px;
+
+    width: 75%;
+    
+    transform: translate(-50%, -50%);
+
+    border-radius: 3px;
+}
+
+#pi_display_popup
+{
+    filter: drop-shadow(0px 0px 21px #ffffff66);
+
+    font-size: 1.33em;
+
+    position: fixed;
+
+    top: 50%; left: 50%;
+
+    border: 4px solid var(--bg-medium);
+
+    background-color: var(--bg-dark);
+    text-align: center;
+
+    padding: 7px;
+    padding-bottom: 14px;
+
+    width: 75%;
+    
+    transform: translate(-50%, -50%);
+
+    border-radius: 3px;
+}
+
+@keyframes pi_display_popup_img_float {
+    0% { rotate: -5deg; }
+    50% { rotate: 5deg; }
+    100% { rotate: -5deg; }
+}
+
+#pi_display_popup > img
+{
+    animation-name: pi_display_popup_img_float;
+    animation-duration: 3s;
+    animation-play-state: running;
+    animation-iteration-count: infinite;
+    animation-fill-mode: both;
+    animation-timing-function: cubic-bezier(0.24,-0.02, 0.78, 1.09);
+
+    width: 80%;
+    aspect-ratio: 1 / 1;
+
+    image-rendering: pixelated;
+
+    filter: drop-shadow(10px 10px 0px #000000);
+}
+
+#user_id_popup > button
+{
+    width: calc(90% + 9px);
+    height: 24px;
+}
+
+input:hover, button:hover
+{
+    background-color: var(--bg-medium-hover);
+}
+
+input, button
+{
+    outline: none;
+
+    transition-duration: 0.15s;
+
+    background-color: var(--bg-medium);
+    border: 3px solid var(--bg-light);
+
+    color: var(--text-color);
+    
+    font-family: var(--text-font);
+}
+
+#user_id_popup > input
+{
+    font-size: 26px;
+
+    width: 90%;
+    height: 34px;
+
+    margin-bottom: 7px;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+body::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+body {
+    color: var(--text-color);
+    font-family: var(--text-font);
+
+    background-color: var(--bg-very-dark);
+
+    overflow: hidden;
+}
+
+.hidden_popup
+{
+    transition-duration: 0.45s;
+    transform: scale(0) translate(-50%, -50%) !important;
+}
+
+.shown_popup
+{
+    transition-duration: 0.45s;
+    transform: scale(1) translate(-50%, -50%) !important;
+}
+
+#collected_pis
+{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    width: 74%;
+    margin-top: 8px;
+
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+#leaderboard
+{
+    width: 26%;
+    text-align: center;
+}
+
+#main_content
+{
+    display: flex;
+}
+
+@keyframes leaderboard_create_p {
+    from { color: #00000000; transform: scale(0); }
+    to { transform: scale(1); }
+}
+
+#leaderboard > p
+{
+    transition-duration: 0.2s;
+
+    animation-name: leaderboard_create_p;
+    animation-duration: 0.33s;
+    animation-fill-mode: forwards;   
+}
+
+#leaderboard > p:hover
+{
+    background-color: var(--bg-dark-highlight);
+    transform: scale(1.1);
+}
+
+@keyframes pi_create {
+    from { transform: rotate(45deg) scale(0.5); opacity: 0; }
+    to { transform: rotate(0) scale(1); opacity: 1; }
+}
+
+.collected_pi
+{
+    animation-name: pi_create;
+    animation-duration: 0.4s;
+    animation-timing-function: ease-out;
+    
+    transition-duration: 0.25s;
+
+    width: calc(50% - 16px);
+    aspect-ratio: 1 / 1;
+
+    padding: 5px;
+    
+    text-align: center;
+
+    border-radius: 3px;
+
+    background-color: var(--bg-darker);
+
+    border: 2px solid var(--bg-medium);
+}
+
+.collected_pi > img
+{
+    image-rendering: pixelated;
+}
+
+.collected_pi:hover
+{
+    background-color: var(--bg-dark-highlight);
+}
+
+.collected_pi > img{
+    width: 85px;
+    height: 85px;
+}
+
+@keyframes confetti_animation {
+    from { top: -50px; rotate: 90deg; }
+    to { top: 100%; rotate: 0deg; }
+}
+
+.confetti
+{
+    position: absolute;
+
+    animation-name: confetti_animation;
+    animation-fill-mode: both;
+
+    width: 7px;
+    height: 7px;
+}
+
+@keyframes pi_animation_scale {
+    from { width: 0px; opacity: 1; }
+    to { width: 500%; opacity: 0; }
+}
+
+.pi_animation
+{
+    animation-name: pi_animation_scale;
+    animation-timing-function: ease-out;
+    animation-duration: 2s;
+    animation-fill-mode: both;
+
+    aspect-ratio: 1 / 1;
+
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    image-rendering: pixelated;
+}
+
+#animation_holder
+{
+    overflow-y: hidden;
+    overflow-x: hidden;
+
+    width: 100%;
+    height: 100%;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    pointer-events: none;
+}
+
+#pi_display_popup > button
+{
+    font-size: 1.15em;
+}
