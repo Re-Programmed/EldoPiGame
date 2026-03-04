@@ -1,240 +1,226 @@
-const DEFAULT_USER_DATA = {
-    id: 0,
-    data: {
-        collected_pi: []
+const main_dud0001 = {
+    main_dud0001_0: 0,
+    main_dud0001_1: {
+        main_dud0001_1_0: []
     }
 }
 
-var PlannedToLoadPiDisplay = null
+var main_ptlpd0002 = null
 
-window.addEventListener('load', Load)
+window.addEventListener('load', main_f1)
 
-function Load()
+function main_f1()
 {
-    const urlParams = new URLSearchParams(window.location.search);
-    var gotPiParam = urlParams.get('unlock');
+    const main_f1_u_p = new URLSearchParams(window.location.search);
+    var main_f1_u_gpp = main_f1_u_p.get(atob("dW5sb2Nr"));
 
-    if(gotPiParam != null && gotPiParam != undefined && gotPiParam != "")
+    if(main_f1_u_gpp != null && main_f1_u_gpp != undefined && main_f1_u_gpp != "")
     {
-        gotPiParam = atob(gotPiParam);
+        main_f1_u_gpp = atob(main_f1_u_gpp);
     }
 
-    const id = LOCAL.RetrieveUserID();
+    const main_f1_i = data_l.data_l_rui();
     
-    if(id == "")
+    if(main_f1_i == "")
     {
-        PlannedToLoadPiDisplay = gotPiParam;
-        CreateUserIDPopup();
+        main_ptlpd0002 = main_f1_u_gpp;
+        main_f9();
     }else{
-        API.GetUserData(id).then(user => {
-            if(user == null)
+        data_a.data_a_gud(main_f1_i).then(main_f1_u => {
+            if(main_f1_u == null)
             {
-                PlannedToLoadPiDisplay = gotPiParam;
-                CreateUserIDPopup();
+                main_ptlpd0002 = main_f1_u_gpp;
+                main_f9();
                 return;
             }
 
-            if(gotPiParam != null && gotPiParam != undefined && gotPiParam != "")
+            if(main_f1_u_gpp != null && main_f1_u_gpp != undefined && main_f1_u_gpp != "")
             {
                 for(var i = 0; i < PI_DATA.length; i++)
                 {
-                    if(PI_DATA[i].id_code.toString() == gotPiParam)
+                    if(PI_DATA[i].id_code.toString() == main_f1_u_gpp)
                     {
-                        if(user.data.collected_pi.includes(i)){break;}
+                        if(main_f1_u.data.collected_pi.includes(i)){break;}
 
-                        //Play confetti effect!
-                        setTimeout(Confetti, 400);
+                        setTimeout(main_f13, 400);
 
-                        //TODO: Check if you already have the PI.
-
-                        //Show pi.
-                        ClickPi(i, true);
-                        GrantPi(user, i)
+                        main_f6(i, true);
+                        main_f2(main_f1_u, i)
                     }
                 }
             }
 
-            $("#user_id_display").text(`${id} - ${user.data.collected_pi.length} pis`)
+            $("#user_id_display").text(`${main_f1_i} - ${main_f1_u.data.collected_pi.length} pis`)
             
-            LoadCollectedPi(user)
+            main_f4(main_f1_u)
         })
 
     }
 
-    CreateLeaderboard()
+    main_f7()
 }
 
-//Gives the specified user the specified id of pi on the API.
-function GrantPi(user, id)
+function main_f2(main_f2_p1, main_f2_p2)
 {
-    if(user.data.collected_pi.includes(id)){return;}
-    user.data.collected_pi.push(id);
-    API.SetUserData(user).then(result => {
-        //Refresh collected pis.
-        LoadCollectedPi(user)
+    if(main_f2_p1.data.collected_pi.includes(main_f2_p2)){return;}
+    main_f2_p1.data.collected_pi.push(main_f2_p2);
+    data_a.data_a_sud(main_f2_p1).then(r => {
+        main_f4(main_f2_p1)
     })
 }
 
-const GetCollectedPiHTML = (piName, piImage) => { return `
-                                <img src=${piImage}>
-                                <p>${piName}</p>
+const main_f3 = (main_f3_p1, main_f3_p2) => { return `
+                                <img src=${main_f3_p2}>
+                                <p>${main_f3_p1}</p>
                                                 ` }
 
-function LoadCollectedPi(user)
+function main_f4(main_f4_p1)
 {
     //Clear collected pi display.
     $("#collected_pis").html("")
 
-    for(var i = 0; i < user.data.collected_pi.length; i++)
+    for(var main_f4_i = 0; main_f4_i < main_f4_p1.data.collected_pi.length; main_f4_i++)
     {
-        var pi = user.data.collected_pi[i];
+        var main_f4_p = main_f4_p1.data.collected_pi[main_f4_i];
 
-        const piContainer = document.createElement("div");
-        piContainer.className = "collected_pi"
-        piContainer.innerHTML = GetCollectedPiHTML(PI_DATA[pi].name, PI_DATA[pi].picture);
+        const main_f4_pc = document.createElement("div");
+        main_f4_pc.className = atob("Y29sbGVjdGVkX3Bp");
+        main_f4_pc.innerHTML = main_f3(PI_DATA[main_f4_p].name, PI_DATA[main_f4_p].picture);
 
-        piContainer.setAttribute("pi_ref", pi);
+        main_f4_pc.setAttribute("pi_ref", main_f4_p);
 
-        piContainer.addEventListener('click', function () {
-            ClickPi(this.getAttribute("pi_ref"))
+        main_f4_pc.addEventListener('click', function () {
+            main_f6(this.getAttribute("pi_ref"))
         })
 
-        document.getElementById("collected_pis").appendChild(piContainer)
+        document.getElementById(atob("Y29sbGVjdGVkX3Bpcw==")).appendChild(main_f4_pc)
     }
 }
 
-var LastPiWasAward = false;
+var main_lpwa = false;
 
-function ClosePiPopup()
+function main_f5()
 {
     $("#pi_display_popup").attr("class", "hidden_popup")
 
-    if(LastPiWasAward)
+    if(main_lpwa)
     {
-        PiAnimation();
+        main_f11();
     }
 }
 
-function ClickPi(id, isAward = false)
+function main_f6(main_f6_p1, main_f6_p2 = false)
 {
-    LastPiWasAward = isAward;
+    main_lpwa = main_f6_p2;
 
     $("#pi_display_popup").attr("class", "shown_popup")
-    $("#pi_display_popup>h3").text(`${isAward ? "You got: " : ""}${PI_DATA[id].name}${isAward ? "!" : ""}`)
-    $("#pi_display_popup>img").attr("src", PI_DATA[id].picture)
-    $("#pi_display_popup>p").text(PI_DATA[id].fact)
+    $("#pi_display_popup>h3").text(`${main_f6_p2 ? "You got: " : ""}${PI_DATA[main_f6_p1].name}${main_f6_p2 ? "!" : ""}`)
+    $("#pi_display_popup>img").attr("src", PI_DATA[main_f6_p1].picture)
+    $("#pi_display_popup>p").text(PI_DATA[main_f6_p1].fact)
 }
 
-function CreateLeaderboard()
+function main_f7()
 {
-    API.GetAllUsers().then(users => {
+    data_a.data_a_gau().then(main_f7_u => {
         for(var i = 0; i < 10; i++)
         {
-            const userData = GetHighestUser(users);
-            if(userData.index == -1){ return; }
+            const main_f7_ud = main_f8(main_f7_u);
+            if(main_f7_ud.main_f8_h_i == -1){ return; }
 
-            const placing = document.createElement("p");
-            placing.innerText = `${(i + 1)}: ${users[userData.index].id} \n${users[userData.index].data.collected_pi.length} pis`;
+            const main_f7_p = document.createElement("p");
+            main_f7_p.innerText = `${(i + 1)}: ${main_f7_u[main_f7_ud.main_f8_h_i].id} \n${main_f7_u[main_f7_ud.main_f8_h_i].data.collected_pi.length} pis`;
             
             if(i == 0)
             {
-                placing.style.color = "gold";
+                main_f7_p.style.color = "gold";
             }else if(i == 1)
             {
-                placing.style.color = "silver";
+                main_f7_p.style.color = "silver";
             }else if(i == 2)
             {
-                placing.style.color = "sandybrown";
+                main_f7_p.style.color = "sandybrown";
             }
             
-            users.splice(userData.index, 1);
+            main_f7_u.splice(main_f7_ud.main_f8_h_i, 1);
 
-            document.getElementById("leaderboard").append(placing);
+            document.getElementById("leaderboard").append(main_f7_p);
         }
     })
 }
 
-/*
-    index: int,
-    value: int
-*/
-function GetHighestUser(users)
+function main_f8(main_f8_p1)
 {
-    var highest = { index: -1, value: 0 }
+    var main_f8_h = { main_f8_h_i: -1, main_f8_h_v: 0 }
 
-    for(var i = 0; i < users.length; i++)
+    for(var main_f8_i = 0; main_f8_i < main_f8_p1.length; main_f8_i++)
     {
-        if(users[i].data.collected_pi.length >= highest.value)
+        if(main_f8_p1[main_f8_i].data.collected_pi.length >= main_f8_h.main_f8_h_v)
         {
-            highest.index = i;
-            highest.value = users[i].data.collected_pi.length;
+            main_f8_h.main_f8_h_i = main_f8_i;
+            main_f8_h.main_f8_h_v = main_f8_p1[main_f8_i].data.collected_pi.length;
         }
     }
 
-    return highest;
+    return main_f8_h;
 }
 
-function CreateUserIDPopup()
+function main_f9()
 {
     $("#user_id_display").text("<no current id>")
-
-    //LOCAL.RemoveUserID();
     $("#user_id_popup").attr("class", "shown_popup");
 }
 
-function CloseUserIDPopup()
+function main_f10()
 {
     $("#user_id_popup").attr("class", "hidden_popup");
 
-     if(PlannedToLoadPiDisplay != null && PlannedToLoadPiDisplay != undefined && PlannedToLoadPiDisplay != "")
+     if(main_ptlpd0002 != null && main_ptlpd0002 != undefined && main_ptlpd0002 != "")
         {
             for(var i = 0; i < PI_DATA.length; i++)
             {
-                if(PI_DATA[i].id_code.toString() == PlannedToLoadPiDisplay)
+                if(PI_DATA[i].id_code.toString() == main_ptlpd0002)
                 {
-                    //Play confetti effect!
-                    Confetti();
+                    main_f13();
 
-                    //Show pi.
-                    ClickPi(i, true);
+                    main_f6(i, true);
                 }
             }
         }
 }
 
-function PiAnimation()
+function main_f11()
 {
-    for(var i = 0; i < 3; i++)
+    for(var main_f11_i = 0; main_f11_i < 3; main_f11_i++)
     {
         setTimeout(function() {
-            const animating = document.createElement("img");
-            animating.className = "pi_animation";
-            animating.src = "./assets/pi_animation.png";
-            document.getElementById("animation_holder").appendChild(animating);
+            const main_f11_a = document.createElement("img");
+            main_f11_a.className = "pi_animation";
+            main_f11_a.src = "./assets/pi_animation.png";
+            document.getElementById("animation_holder").appendChild(main_f11_a);
 
             setTimeout(function() {
-                animating.remove();
+                main_f11_a.remove();
             }, 3000)
-        }, 250 * i)
+        }, 250 * main_f11_i)
 
         setTimeout(function() {
-            const animating = document.createElement("img");
-            animating.className = "pi_animation";
-            animating.src = "./assets/pi_animation_white.png";
-            document.getElementById("animation_holder").appendChild(animating);
+            const main_f11_a = document.createElement("img");
+            main_f11_a.className = "pi_animation";
+            main_f11_a.src = "./assets/pi_animation_white.png";
+            document.getElementById("animation_holder").appendChild(main_f11_a);
 
             setTimeout(function() {
-                animating.remove();
+                main_f11_a.remove();
             }, 3000)
-        }, 250 * i + 250)
+        }, 250 * main_f11_i + 250)
     }
 }
 
-function UpdateStudentID()
+function main_f12()
 {
-    const value = $("#user_id_popup>input").val()
+    const main_f12_v = $("#user_id_popup>input").val()
 
-    if(value.length != 9 || isNaN(parseInt(value)))
+    if(main_f12_v.length != 9 || isNaN(parseInt(main_f12_v)))
     {
         alert("Enter a valid student ID.");
         return;
@@ -242,10 +228,10 @@ function UpdateStudentID()
 
     $("#user_id_popup>button").text("Loading...");
 
-    API.GetAllUsers().then(users => {
-        for(var i = 0; i < users.length; i++)
+    data_a.data_a_gau().then(main_f12_u => {
+        for(var i = 0; i < main_f12_u.length; i++)
         {
-            if(users[i].id == value)
+            if(main_f12_u[i].id == main_f12_v)
             {
                 alert("That student ID is in use!")
 
@@ -254,65 +240,60 @@ function UpdateStudentID()
             }
         }
 
-        var data = DEFAULT_USER_DATA;
-        data.id = value;
+        var main_f12_da = main_dud0001;
+        main_f12_da.main_dud0001_0 = main_f12_v;
 
-        if(PlannedToLoadPiDisplay != null && PlannedToLoadPiDisplay != undefined && PlannedToLoadPiDisplay != "")
+        if(main_ptlpd0002 != null && main_ptlpd0002 != undefined && main_ptlpd0002 != "")
         {
             for(var i = 0; i < PI_DATA.length; i++)
             {
-                if(PI_DATA[i].id_code.toString() == PlannedToLoadPiDisplay)
+                if(PI_DATA[i].id_code.toString() == main_ptlpd0002)
                 {
-                    data.data.collected_pi = [ i ]
+                    main_f12_da.main_dud0001_1.main_dud0001_1_0 = [ i ]
                 }
             }
         }
 
-        API.SetUserData(data).then(result => {
-            LOCAL.SaveUserID(value);
-            $("#user_id_display").text(value)
-            CloseUserIDPopup();
-
-            //Reset button text just in case.
+        data_a.data_a_sud(main_f12_da).then(result => {
+            data_l.data_l_sui(main_f12_v);
+            $("#user_id_display").text(main_f12_v)
+            main_f10();
             $("#user_id_popup>button").text("Claim");
-
-            console.log(data)
-
-            LoadCollectedPi(data);
+            main_f4(main_f12_da);
         })
     });
 
 }
 
-var activeConfetti = []
-function Confetti()
+var main_f13_PARAM = []
+function main_f13()
 {
     for(var i = 0; i < 200; i++)
     {
-        const confettiPiece = document.createElement("div");
-        confettiPiece.className = "confetti";
-        confettiPiece.style.left = Math.floor(Math.random() * window.innerWidth) + "px";
+        const main_f13_c = document.createElement("div");
+        main_f13_c.className = "confetti";
+        main_f13_c.style.left = Math.floor(Math.random() * window.innerWidth) + "px";
         
-        var bgColor = "#";
+        var main_f13_b = "#";
 
-        if(Math.random() < 0.5){ bgColor += "FF"; } else { bgColor += "00"; }
-        if(Math.random() < 0.5){ bgColor += "FF"; } else { bgColor += "00"; }
-        if(Math.random() < 0.5){ bgColor += "FF"; } else { bgColor += "00"; }
+        if(Math.random() < 0.5){ main_f13_b += "FF"; } else { main_f13_b += "00"; }
+        if(Math.random() < 0.5){ main_f13_b += "FF"; } else { main_f13_b += "00"; }
+        if(Math.random() < 0.5){ main_f13_b += "FF"; } else { main_f13_b += "00"; }
 
-        confettiPiece.style.backgroundColor = bgColor;
-        confettiPiece.style.transform = `translate(0, ${Math.random() * 50}px)`;
+        main_f13_c.style.backgroundColor = main_f13_b;
+        main_f13_c.style.transform = `translate(0, ${Math.random() * 50}px)`;
 
-        confettiPiece.style.animationDuration = `${Math.random() * 3 + 1}s`;
+        main_f13_c.style.animationDuration = `${Math.random() * 3 + 1}s`;
 
-        document.getElementById("animation_holder").appendChild(confettiPiece);
-        activeConfetti.push(confettiPiece);
+        document.getElementById("animation_holder").appendChild(main_f13_c);
+        main_f13_PARAM.push(main_f13_c);
     }
 
     window.setTimeout(function () {
-        while(activeConfetti.length > 0)
+        while(main_f13_PARAM.length > 0)
         {
-            activeConfetti[activeConfetti.length - 1].remove();
-            activeConfetti.pop();
+            main_f13_PARAM[main_f13_PARAM.length - 1].remove();
+            main_f13_PARAM.pop();
         }
     }, 5000)
 }

@@ -14,7 +14,7 @@ const PI_DATA = [
     {
         id_code: 339534,
         name: "Mud Pi",
-        fact: "For pi, Babylonian civilization used the fraction 25/8 and the Chinese used the integer 3. By 1665, Isaac Newton calculated pi to 16 decimal places. In the early 1700s Thomas Lagney calculated 127 decimal places of pi and in the second half of the twentieth century the number of digits of pi increased from about 2000 to 500,000. In 2017 when a Swiss scientist computed more than 22 trillion digits of pi which took over a hundred days.",
+        fact: "For pi, Babylonian civilization used the fraction 25/8 and the Chinese used the integer 3. By 1665, Newton calculated pi to 16 decimal places.In 2017 when a Swiss scientist computed more than 22 trillion digits of pi which took over a hundred days.",
         picture: "./assets/mud_pi.png"
     },
     {
@@ -49,7 +49,7 @@ const PI_DATA = [
     },
     {
         id_code: 401276,
-        name: "Black Bottom Banana Cream Pie With Vanilla Wafer Crust",
+        name: "Black Bottom Banana Cream Pi With Vanilla Wafer Crust",
         fact: "Did you know that you only need 39 digits of pi to calculate the circumference of the observable universe to within a hydrogen atom.",
         picture: "./assets/banana_pi.png"
     },
