@@ -252,7 +252,6 @@ function UpdateStudentID()
                // alert("That student ID is in use!")
 
                 previousUserData = users[i];
-                console.log(previousUserData);
                 break;
                // $("#user_id_popup>button").text("Claim");
               //  return;
@@ -268,7 +267,10 @@ function UpdateStudentID()
             {
                 if(PI_DATA[i].id_code.toString() == PlannedToLoadPiDisplay)
                 {
-                    data.data.collected_pi.push(i);
+                    if(!data.data.collected_pi.includes(i))
+                    {
+                        data.data.collected_pi.push(i);
+                    }
                 }
             }
         }
