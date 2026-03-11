@@ -242,19 +242,24 @@ function UpdateStudentID()
 
     $("#user_id_popup>button").text("Loading...");
 
+    var previousUserData = null;
+
     API.GetAllUsers().then(users => {
         for(var i = 0; i < users.length; i++)
         {
             if(users[i].id == value)
             {
-                alert("That student ID is in use!")
+               // alert("That student ID is in use!")
 
-                $("#user_id_popup>button").text("Claim");
-                return;
+                previousUserData = users[i];
+                console.log(previousUserData);
+                break;
+               // $("#user_id_popup>button").text("Claim");
+              //  return;
             }
         }
 
-        var data = DEFAULT_USER_DATA;
+        var data = previousUserData == null ? DEFAULT_USER_DATA : previousUserData;
         data.id = value;
 
         if(PlannedToLoadPiDisplay != null && PlannedToLoadPiDisplay != undefined && PlannedToLoadPiDisplay != "")
@@ -263,7 +268,7 @@ function UpdateStudentID()
             {
                 if(PI_DATA[i].id_code.toString() == PlannedToLoadPiDisplay)
                 {
-                    data.data.collected_pi = [ i ]
+                    data.data.collected_pi.push(i);
                 }
             }
         }
